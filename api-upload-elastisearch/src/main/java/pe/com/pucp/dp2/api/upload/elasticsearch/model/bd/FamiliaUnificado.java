@@ -7,20 +7,19 @@ package pe.com.pucp.dp2.api.upload.elasticsearch.model.bd;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import java.util.Date;
 
 /**
  *
  * @author johnny
  */
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "familia", type = "familia")
-public class Familia {
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "familiaunificado", type = "familiaunificado")
+public class FamiliaUnificado {
 
-    
     
     @Id
     private String id;
@@ -41,10 +40,16 @@ public class Familia {
     private int otrosAnimales;
     private boolean jardin;
     private float jardinMetros;
+    private int nroIntegrante;
+    private String nombre;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+    private int edad;
+    private String educacion;
     
-    public Familia(){    }
+    public FamiliaUnificado(){}
     
-    public Familia(String idFamily,
+    public FamiliaUnificado(String idFamily,
                     String direccion,
                     String manzana,
                     String lote,
@@ -55,7 +60,14 @@ public class Familia {
                     String cantGatos,
                     String otrosAnimales,
                     String jardin,
-                    String jardinMetros){
+                    String jardinMetros,
+                    String nroIntegrante,
+                    String nombre,
+                    String apellidoPaterno,
+                    String apellidoMaterno,
+                    String edad,
+                    String educacion){
+        
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
         this.date = new Date(System.currentTimeMillis());  
         
@@ -74,6 +86,13 @@ public class Familia {
         else
             this.jardin = false;
         this.jardinMetros = Float.valueOf(jardinMetros);
+        this.nroIntegrante = Integer.valueOf(nroIntegrante);
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.edad = Integer.valueOf(edad);
+        this.educacion = educacion;
+        
     }
     
     public String getId() {
@@ -82,14 +101,6 @@ public class Familia {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getIdFamily() {
@@ -187,4 +198,53 @@ public class Familia {
     public void setJardinMetros(float jardinMetros) {
         this.jardinMetros = jardinMetros;
     }
+
+    public int getNroIntegrante() {
+        return nroIntegrante;
+    }
+
+    public void setNroIntegrante(int nroIntegrante) {
+        this.nroIntegrante = nroIntegrante;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getEducacion() {
+        return educacion;
+    }
+
+    public void setEducacion(String educacion) {
+        this.educacion = educacion;
+    }
+    
 }

@@ -10,25 +10,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import pe.com.pucp.dp2.api.upload.elasticsearch.dao.csv.FamiliaDAO;
-import pe.com.pucp.dp2.api.upload.elasticsearch.model.bd.Familia;
-import pe.com.pucp.dp2.api.upload.elasticsearch.repository.FamiliaRepository;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.bd.FamiliaUnificado;
+import pe.com.pucp.dp2.api.upload.elasticsearch.repository.FamiliaUnificadoRepository;
 
 /**
  *
  * @author johnny
  */
 @Service
-public class FamiliaServiceImpl implements FamiliaService{
-    
+public class FamiliaUnificadoServiceImpl implements FamiliaUnificadoService{
+
     @Autowired
-    FamiliaRepository familiaRepository;
+    FamiliaUnificadoRepository familiaRepository;
     
     @Autowired
     FamiliaDAO familiaDAOimpl;
     
+    @Override
     public void uploadCsv(MultipartFile file) throws Exception{
         System.out.println("entra service upload");
-        List<Familia> listFamilia = familiaDAOimpl.getListFamilia(file);
+        List<FamiliaUnificado> listFamilia = familiaDAOimpl.getListFamiliaUnificado(file);
         familiaRepository.saveAll(listFamilia);
     }
     

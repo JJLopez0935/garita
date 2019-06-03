@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import pe.com.pucp.dp2.api.upload.elasticsearch.service.FamiliaService;
+import pe.com.pucp.dp2.api.upload.elasticsearch.service.FamiliaUnificadoService;
 
 /**
  *
@@ -28,6 +29,9 @@ import pe.com.pucp.dp2.api.upload.elasticsearch.service.FamiliaService;
 @RequestMapping(value = "/api/familia")
 public class FamiliaController {
     
+    
+    @Autowired
+    FamiliaUnificadoService familiaUnificadoService;
     
     @Autowired
     FamiliaService familiaService;
@@ -48,7 +52,25 @@ public class FamiliaController {
     @ResponseBody
     public ResponseEntity<String> importCsv(@RequestPart(value = "file", required = false) MultipartFile file) {
         try{
-            
+            System.out.println("llega");
+            if (file!=null && !file.isEmpty()) {
+                familiaUnificadoService.uploadCsv(file);
+            }
+            return new ResponseEntity<>("Ok", HttpStatus.OK);
+        }catch (Exception e){
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            return new ResponseEntity<>("Mal", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+    
+    @RequestMapping(value = "/batchFamilia", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> importCsv2(@RequestPart(value = "file", required = false) MultipartFile file) {
+        try{
+            System.out.println("llega");
             if (file!=null && !file.isEmpty()) {
                 familiaService.uploadCsv(file);
             }

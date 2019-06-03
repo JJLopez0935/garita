@@ -11,7 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author johnny
  */
-public interface FamiliaService {
+public interface FamiliaUnificadoService {
     
-    void uploadCsv(MultipartFile file) throws Exception; 
+    void  uploadCsv(MultipartFile file) throws Exception; 
+
+    
 }
