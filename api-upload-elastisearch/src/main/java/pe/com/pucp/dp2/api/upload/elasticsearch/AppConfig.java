@@ -21,16 +21,21 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 
 
 import java.net.InetAddress;
+import javax.sql.DataSource;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 @EnableElasticsearchRepositories(basePackages = "pe.com.pucp.dp2.api.upload.elasticsearch.repository")
-//@ComponentScan(basePackages = "pe.com.hiper.bmatic.wssimulator.simulacion",
-//                basePackageClasses = Simulador.class)
+@PropertySource(value = { "classpath:application.properties" })
 public class AppConfig {
 
     @Autowired
     private Environment env;
-
+    
     @Value("${elasticsearch.host}")
     private String EsHost;
     @Value("${elasticsearch.port}")
@@ -49,25 +54,14 @@ public class AppConfig {
         return new ElasticsearchTemplate(client());
     }
 
-//
-//    @Bean
-//    public TomcatServletWebServerFactory containerFactory() {
-//        return new TomcatServletWebServerFactory() {
-//            protected void customizeConnector(Connector connector) {
-//                String ms = String.valueOf(env.getProperty("spring.servlet.multipart.max-request-size"));
-//                int maxSize = Integer.parseInt(ms.substring(0, ms.length()-2)) * 1000;
-//                super.customizeConnector(connector);
-//                connector.setMaxPostSize(maxSize);
-//                connector.setMaxSavePostSize(maxSize);
-//                if (connector.getProtocolHandler() instanceof AbstractHttp11Protocol) {
-//
-//                    ((AbstractHttp11Protocol <?>) connector.getProtocolHandler()).setMaxSwallowSize(maxSize);
-//                    logger.info("Set MaxSwallowSize "+ maxSize);
-//                }
-//            }
-//        };
-//
-//    }
+    
+    
+   
+    
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
 
 
 
