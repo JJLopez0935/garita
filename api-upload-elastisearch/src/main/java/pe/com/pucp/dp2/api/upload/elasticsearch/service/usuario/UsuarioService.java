@@ -14,5 +14,6 @@ import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 public interface UsuarioService {
     
     void saveUsuario(UsuarioDTO u);
+    boolean login(UsuarioDTO u);
     
 }

@@ -34,6 +34,28 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
     
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> login(@RequestBody @Valid @NotNull  UsuarioDTO usuarioDto) {
+        try{
+            System.out.println("llega login");
+            if(usuarioService.login(usuarioDto))
+                
+                return new ResponseEntity<>("OK", HttpStatus.OK);
+            else
+                return new ResponseEntity<>("NO", HttpStatus.OK);
+            
+        }catch (Exception e){
+            System.out.println("error");
+            System.out.println(e);
+            System.out.println(e.toString());
+            StringWriter sw = new StringWriter();
+            return new ResponseEntity<>(sw.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+    
     @RequestMapping(value = "/insertar", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> insertarUsuario(@RequestBody @Valid @NotNull  UsuarioDTO usuarioDto) {

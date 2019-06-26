@@ -27,5 +27,10 @@ public class UsuarioServiceImpl implements UsuarioService{
         System.out.println("sale de repostiroy");
         
     }
+
+    @Override
+    public boolean login(UsuarioDTO u) {
+        return usuarioRepository.login(u);
+    }
     
 }
