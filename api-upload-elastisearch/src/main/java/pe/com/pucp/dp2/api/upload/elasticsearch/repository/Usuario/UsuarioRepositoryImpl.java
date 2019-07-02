@@ -8,14 +8,19 @@ package pe.com.pucp.dp2.api.upload.elasticsearch.repository.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ViviendaDTO;
 
 /**
  *
@@ -62,26 +67,59 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
 
     @Override
     public Boolean login(UsuarioDTO u) {
-        String query = "select * from usuario"
-                       + " where email = (?)"
-                       + " and contrasenia = (?)";
-        
-        try {
-            System.out.println(u.getEmail());
-            System.out.println(u.getPassword());
-            PreparedStatement preparedStatement = jdbcTemplate.getDataSource().getConnection().prepareStatement(query);
-            preparedStatement.setString(1, u.getEmail());
-            preparedStatement.setString(2, u.getPassword());
-            ResultSet rs = preparedStatement.executeQuery();
-            if(rs.first()){
+       
+            String SQL = "select * from usuario where usuario = '" +  u.getUsuario() + 
+                         "' and password = '" + u.getPassword() + "'";
+            
+            
+            
+            List <UsuarioDTO> students = jdbcTemplate.query(SQL, 
+               new ResultSetExtractor<List<UsuarioDTO>>(){
+
+               public List<UsuarioDTO> extractData(
+                  ResultSet rs) throws SQLException, DataAccessException {
+
+                  List<UsuarioDTO> list = new ArrayList<UsuarioDTO>();  
+                  while(rs.next()){  
+                     UsuarioDTO student = new UsuarioDTO();
+                     
+                     list.add(student);  
+                  }  
+                  return list;  
+               }    	  
+            });
+            
+            if(students.size()>0){
                 return true;
             }else{
-                return false;
+                String SQL2 = "select * from vivienda where usuario = '" +  u.getUsuario() + 
+                         "' and password = '" + u.getPassword() + "'";
+                        
+            
+                List <ViviendaDTO> students2 = jdbcTemplate.query(SQL2, 
+                   new ResultSetExtractor<List<ViviendaDTO>>(){
+
+                   public List<ViviendaDTO> extractData(
+                      ResultSet rs) throws SQLException, DataAccessException {
+
+                      List<ViviendaDTO> list2 = new ArrayList<ViviendaDTO>();  
+                      while(rs.next()){  
+                         ViviendaDTO student = new ViviendaDTO();
+
+                         list2.add(student);  
+                      }  
+                      return list2;  
+                   }    	  
+                });
+                
+                if(students2.size()>0)
+                    return true;
+                else
+                    return false;
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
+            
+            
+       
         
         
     }
