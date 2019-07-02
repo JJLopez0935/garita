@@ -1,0 +1,70 @@
+{
+  "fechaRegistro":"01/01/2020",
+  "fechaInicio":"01/01/2020",
+  "periodo":"1",
+  "estado":"1",
+  "viviendas":"1",
+  "vivEncuestadas":"1",
+  "formularios":[
+    {
+        "nombre":"formulario1",
+        "tipo":"tipo1",
+        "estado":"activo",
+        "preguntas":[
+          {
+            "tipoPregunta":"valor",
+            "pregunta":"¿Cuantos son?",
+            "clave":"integrantes",
+            "opciones":[
+            ]
+          },
+          {
+            "tipoPregunta":"fecha",
+            "pregunta":"¿A que hora duermen?",
+            "clave":"horaDormir",
+            "opciones":[
+
+            ]
+          },
+          {
+            "tipoPregunta":"opciones",
+            "pregunta":"¿Quien manda?",
+            "clave":"manda",
+            "opciones":[
+              "Papa", "mama", "otros"
+            ]
+          }
+        ]
+    },
+    {
+      "nombre":"formulario2",
+      "tipo":"tipo1",
+      "estado":"activo",
+      "preguntas":[
+        {
+          "tipoPregunta":"valor",
+          "pregunta":"¿Cuantos son?",
+          "clave":"integrantes",
+          "opciones":[
+          ]
+        },
+        {
+          "tipoPregunta":"fecha",
+          "pregunta":"¿A que hora duermen?",
+          "clave":"horaDormir",
+          "opciones":[
+
+          ]
+        },
+        {
+          "tipoPregunta":"opciones",
+          "pregunta":"¿Quien manda?",
+          "clave":"manda",
+          "opciones":[
+            "Papa", "mama", "otros"
+          ]
+        }
+      ]
+    }
+  ]
+}
