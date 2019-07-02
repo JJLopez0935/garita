@@ -31,7 +31,6 @@ public class PreguntaRepositoryImpl {
     
     public Boolean saveUsuario(Pregunta p)  {
         
-        System.out.println("entra save pregunta");
         String query = "INSERT INTO pregunta"
                 + " (TipoPregunta, pregunta, clave) "
                 + " VALUE(?,?,?)";
@@ -57,7 +56,6 @@ public class PreguntaRepositoryImpl {
         System.out.println("antes de insertar OPCION");
         if(p.getTipoPregunta().equalsIgnoreCase("opciones")){
             
-            System.out.println("entra aqui carajoooo");
             
             int idOpcion = obtenerUltimoIdOpcion()+1; System.out.println("idPcion " + idOpcion);
             int idPregunta = obtenerUltimoIdPregunta(); System.out.println("idPregunta " + idPregunta);
@@ -66,8 +64,6 @@ public class PreguntaRepositoryImpl {
                         + " (nombre, descripcion)"
                         + " VALUE(?,?)";
                 
-                System.out.println("opciones");
-                System.out.println(st);
                 
                 jdbcTemplate.execute(queryInsertOpcion,new PreparedStatementCallback<Boolean>(){
                     @Override
@@ -89,7 +85,6 @@ public class PreguntaRepositoryImpl {
                 });
                 
                 
-                System.out.println("insertar opcionPregunta");
                 jdbcTemplate.update(
                         "INSERT INTO opcionPregunta (idPregunta, idOpcion, activo) VALUES (?, ?, ?)", idPregunta, idOpcion++, true);
                 
@@ -125,7 +120,6 @@ public class PreguntaRepositoryImpl {
         Integer rs = jdbcTemplate.queryForObject(
                     "SELECT MAX(idOpcion) FROM opcion", Integer.class);
         
-        System.out.println("");
         
         if(rs!=null && rs!=0){
           return rs;

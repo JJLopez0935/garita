@@ -41,7 +41,6 @@ public class CensoRepositoryImpl {
                     + " (fechaRegistro, fechaInicio, periodo, estado, viviendas, vivEncuestadas) "
                     + " VALUE(?,?,?,?,?,?)";
             
-            System.out.println("uert");
             jdbcTemplate.execute(query,new PreparedStatementCallback<Boolean>(){
                 @Override
                 public Boolean doInPreparedStatement(PreparedStatement ps){
@@ -65,13 +64,11 @@ public class CensoRepositoryImpl {
             });
             
             
-            System.out.println("pasa mierda");
             int censo = obtenerIdFormulario();
             
             for(Formulario f: c.getFormularios()){
                 
                 formularioRepositoryImpl.saveUsuario(f);
-                System.out.println("pasa save formulario");
                 int forId = formularioRepositoryImpl.obtenerIdFormulario();
                 
                 String queryInsertOpcion = "INSERT INTO formulariosCenso"
@@ -94,7 +91,6 @@ public class CensoRepositoryImpl {
                     }
                 });
                 
-                System.out.println("pasa save formulario_censo");
                 
                 
                 

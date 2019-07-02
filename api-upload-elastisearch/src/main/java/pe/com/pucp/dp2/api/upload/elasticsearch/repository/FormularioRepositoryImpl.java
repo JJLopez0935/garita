@@ -65,7 +65,6 @@ public class FormularioRepositoryImpl {
             
             int idFormulario = obtenerIdFormulario();
             
-            System.out.println("ants de pregunta");
             
             for(Pregunta p : f.getPreguntas()){
                 preguntaRepositoryImpl.saveUsuario(p);
