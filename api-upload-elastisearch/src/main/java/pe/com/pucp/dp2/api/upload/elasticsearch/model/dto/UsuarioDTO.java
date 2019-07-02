@@ -19,12 +19,15 @@ public class UsuarioDTO {
     private int usuarioId;
     private int personaId;
     private String nombres;
-    private String apPat;
-    private String apMat;
-    private int rolId;
+    private String apePaterno;
+    private String apeMaterno;
+    private int idRol;
     private String email;
-    private Date fechaNacimiento;
+    private Date fecNacimiento;
     private String password;
+    private boolean activo;
+    private String usuario;
+    
     
     public UsuarioDTO(){}
     
@@ -52,28 +55,52 @@ public class UsuarioDTO {
         this.nombres = nombres;
     }
 
-    public String getApPat() {
-        return apPat;
+    public String getApePaterno() {
+        return apePaterno;
     }
 
-    public void setApPat(String apPat) {
-        this.apPat = apPat;
+    public void setApePaterno(String apePaterno) {
+        this.apePaterno = apePaterno;
     }
 
-    public String getApMat() {
-        return apMat;
+    public String getApeMaterno() {
+        return apeMaterno;
     }
 
-    public void setApMat(String apMat) {
-        this.apMat = apMat;
+    public void setApeMaterno(String apeMaterno) {
+        this.apeMaterno = apeMaterno;
     }
 
-    public int getRolId() {
-        return rolId;
+    public int getIdRol() {
+        return idRol;
     }
 
-    public void setRolId(int rolId) {
-        this.rolId = rolId;
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
+    }
+
+    public Date getFecNacimiento() {
+        return fecNacimiento;
+    }
+
+    public void setFecNacimiento(Date fecNacimiento) {
+        this.fecNacimiento = fecNacimiento;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getEmail() {
@@ -84,13 +111,7 @@ public class UsuarioDTO {
         this.email = email;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
+    
 
     public String getPassword() {
         return password;

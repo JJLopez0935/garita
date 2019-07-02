@@ -33,8 +33,8 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
         System.out.println(u.getNombres());
         
         String query = "INSERT INTO usuario"
-                + " (nombres, ap_pat, ap_mat, rol_id, email, fecnacimiento, contrasenia) "
-                + " VALUE(?,?,?,?,?,Curdate(),?)";
+                + " (nombres, apePaterno, apeMaterno, fecNacimiento, email, activo, idRol, usuario, password, fecRegistro) "
+                + " VALUE(?,?,?,?,?,?,?,?,?,Curdate())";
         
         System.out.println("llega antes de insertar");
         
@@ -44,11 +44,14 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
                      {  
                          System.out.println("entra aqui");
                 ps.setString(1, u.getNombres());  
-                ps.setString(2, u.getApPat());  
-                ps.setString(3, u.getApMat());
-                ps.setInt(4, u.getRolId()); 
+                ps.setString(2, u.getApeMaterno());  
+                ps.setString(3, u.getApeMaterno());
+                ps.setDate(4, u.getFecNacimiento()); 
                 ps.setString(5, u.getEmail()); 
-                ps.setString(6, u.getPassword()); 
+                ps.setBoolean(6, u.isActivo());
+                ps.setInt(7, u.getIdRol());
+                ps.setString(8, u.getUsuario());
+                ps.setString(9, u.getPassword());
 
                 return ps.execute();  
 
