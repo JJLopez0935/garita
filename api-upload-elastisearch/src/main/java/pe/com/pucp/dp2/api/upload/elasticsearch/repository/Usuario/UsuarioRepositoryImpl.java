@@ -58,8 +58,8 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
                       
                     ps.execute();
                     return true;
-                } catch (Exception ex) {
-                    Logger.getLogger(UsuarioRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    
                     return false;                
                 }
             }  
