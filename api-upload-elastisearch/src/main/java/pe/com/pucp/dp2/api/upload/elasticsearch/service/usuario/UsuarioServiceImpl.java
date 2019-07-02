@@ -22,9 +22,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     
     @Override
     public void saveUsuario(UsuarioDTO u) {
-        System.out.println("antes de llamar repository");
         usuarioRepository.saveUsuario(u);
-        System.out.println("sale de repostiroy");
         
     }
 

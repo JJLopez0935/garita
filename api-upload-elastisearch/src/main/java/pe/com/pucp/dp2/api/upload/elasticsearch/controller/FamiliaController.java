@@ -39,7 +39,6 @@ public class FamiliaController {
     @GetMapping("/resumen")
     public ResponseEntity<String> getResumen() {
         try{
-            System.out.println("gggggg");
             return new ResponseEntity<>("gggg",HttpStatus.OK);
         }catch (Exception e){
             
@@ -52,7 +51,6 @@ public class FamiliaController {
     @ResponseBody
     public ResponseEntity<String> importCsv(@RequestPart(value = "file", required = false) MultipartFile file) {
         try{
-            System.out.println("llega");
             if (file!=null && !file.isEmpty()) {
                 familiaUnificadoService.uploadCsv(file);
             }
@@ -70,7 +68,6 @@ public class FamiliaController {
     @ResponseBody
     public ResponseEntity<String> importCsv2(@RequestPart(value = "file", required = false) MultipartFile file) {
         try{
-            System.out.println("llega");
             if (file!=null && !file.isEmpty()) {
                 familiaService.uploadCsv(file);
             }

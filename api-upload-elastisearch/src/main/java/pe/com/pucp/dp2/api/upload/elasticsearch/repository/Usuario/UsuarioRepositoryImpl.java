@@ -36,13 +36,11 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
                 + " (nombres, apePaterno, apeMaterno, fecNacimiento, email, activo, idRol, usuario, password, fecRegistro) "
                 + " VALUE(?,?,?,?,?,?,?,?,?,Curdate())";
         
-        System.out.println("llega antes de insertar");
         
         return jdbcTemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
             @Override  
             public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException  
                      {  
-                         System.out.println("entra aqui");
                 ps.setString(1, u.getNombres());  
                 ps.setString(2, u.getApeMaterno());  
                 ps.setString(3, u.getApeMaterno());
@@ -76,10 +74,8 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
             preparedStatement.setString(2, u.getPassword());
             ResultSet rs = preparedStatement.executeQuery();
             if(rs.first()){
-                System.out.println("si hay");
                 return true;
             }else{
-                System.out.println("no hay");
                 return false;
             }
         } catch (SQLException ex) {

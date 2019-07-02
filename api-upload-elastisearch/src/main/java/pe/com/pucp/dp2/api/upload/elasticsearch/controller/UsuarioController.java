@@ -38,7 +38,6 @@ public class UsuarioController {
     @ResponseBody
     public ResponseEntity<String> login(@RequestBody @Valid @NotNull  UsuarioDTO usuarioDto) {
         try{
-            System.out.println("llega login");
             if(usuarioService.login(usuarioDto))
                 
                 return new ResponseEntity<>("OK", HttpStatus.OK);
@@ -60,9 +59,6 @@ public class UsuarioController {
     @ResponseBody
     public ResponseEntity<String> insertarUsuario(@RequestBody @Valid @NotNull  UsuarioDTO usuarioDto) {
         try{
-            System.out.println("llega insertar usuario");
-            System.out.println(usuarioDto.getNombres());
-            usuarioService.saveUsuario(usuarioDto);
             return new ResponseEntity<>("Ok", HttpStatus.OK);
         }catch (Exception e){
             System.out.println("error");
