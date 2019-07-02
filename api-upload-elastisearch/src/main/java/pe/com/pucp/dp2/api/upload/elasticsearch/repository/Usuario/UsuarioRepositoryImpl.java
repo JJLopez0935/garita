@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -44,25 +43,28 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
         
         return jdbcTemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
             @Override  
-            public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException  
+            public Boolean doInPreparedStatement(PreparedStatement ps)   
                      {  
-                ps.setString(1, u.getNombres());  
-                ps.setString(2, u.getApeMaterno());  
-                ps.setString(3, u.getApeMaterno());
-                ps.setDate(4, u.getFecNacimiento()); 
-                ps.setString(5, u.getEmail()); 
-                ps.setBoolean(6, u.isActivo());
-                ps.setInt(7, u.getIdRol());
-                ps.setString(8, u.getUsuario());
-                ps.setString(9, u.getPassword());
-
-                return ps.execute();  
-
+                try {
+                    ps.setString(1, u.getNombres());
+                    ps.setString(2, u.getApeMaterno());
+                    ps.setString(3, u.getApeMaterno());
+                    ps.setDate(4, u.getFecNacimiento());
+                    ps.setString(5, u.getEmail());
+                    ps.setBoolean(6, u.isActivo());
+                    ps.setInt(7, u.getIdRol());
+                    ps.setString(8, u.getUsuario());
+                    ps.setString(9, u.getPassword());
+                      
+                    ps.execute();
+                    return true;
+                } catch (Exception ex) {
+                    Logger.getLogger(UsuarioRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+                    return false;                
+                }
             }  
             });  
         
-//        jdbcTemplate.execute(query);
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
