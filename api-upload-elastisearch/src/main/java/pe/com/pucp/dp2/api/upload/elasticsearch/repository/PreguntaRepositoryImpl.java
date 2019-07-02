@@ -57,8 +57,8 @@ public class PreguntaRepositoryImpl {
         if(p.getTipoPregunta().equalsIgnoreCase("opciones")){
             
             
-            int idOpcion = obtenerUltimoIdOpcion()+1; System.out.println("idPcion " + idOpcion);
-            int idPregunta = obtenerUltimoIdPregunta(); System.out.println("idPregunta " + idPregunta);
+            int idOpcion = obtenerUltimoIdOpcion()+1; 
+            int idPregunta = obtenerUltimoIdPregunta(); 
             for(String st: p.getOpciones()){
                 String queryInsertOpcion = "INSERT INTO opcion"
                         + " (nombre, descripcion)"

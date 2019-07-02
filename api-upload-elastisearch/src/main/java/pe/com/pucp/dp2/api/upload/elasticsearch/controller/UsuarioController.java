@@ -6,6 +6,7 @@
 package pe.com.pucp.dp2.api.upload.elasticsearch.controller;
 
 import java.io.StringWriter;
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,23 @@ public class UsuarioController {
             System.out.println(e.toString());
             StringWriter sw = new StringWriter();
             return new ResponseEntity<>(new ResponseGeneral(500, sw.toString(), null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+    
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<UsuarioDTO>> getUsuarios() {
+        try{
+            
+            return new ResponseEntity<>(usuarioService.listUsuarios(), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println("error");
+            System.out.println(e);
+            System.out.println(e.toString());
+            StringWriter sw = new StringWriter();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
 

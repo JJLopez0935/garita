@@ -5,6 +5,7 @@
  */
 package pe.com.pucp.dp2.api.upload.elasticsearch.repository.Usuario;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -124,6 +125,39 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
        
         
         
+    }
+
+    @Override
+    public List<UsuarioDTO> getUsuarios() {
+        String SQL = "select * from usuario";           
+            
+        List <UsuarioDTO> students = jdbcTemplate.query(SQL, 
+           new ResultSetExtractor<List<UsuarioDTO>>(){
+
+           public List<UsuarioDTO> extractData(
+              ResultSet rs) throws SQLException, DataAccessException {
+
+              List<UsuarioDTO> list = new ArrayList<UsuarioDTO>();  
+              while(rs.next()){  
+                 UsuarioDTO student = new UsuarioDTO();
+                student.setActivo(rs.getBoolean("activo"));
+                student.setApeMaterno(rs.getString("apePaterno")); 
+                student.setApePaterno(rs.getString("apeMaterno"));
+                student.setEmail(rs.getString("email"));
+                student.setFecNacimiento(rs.getDate("fecNacimiento"));
+                student.setIdRol(rs.getInt("idRol"));
+                student.setNombres(rs.getString("nombres"));
+                student.setPassword(rs.getString("password"));
+                student.setUsuario(rs.getString("usuario"));
+                student.setUsuarioId(rs.getInt("idUsuario"));
+                 list.add(student);  
+
+                 
+              }  
+              return list;  
+           }    	  
+        });
+        return students;
     }
     
 }

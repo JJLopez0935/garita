@@ -4,3 +4,37 @@ http://localhost:8080/api/usuario/insertar
 http://localhost:8080/api/vivienda/crear
 http://localhost:8080/api/residente/crear
 http://localhost:8080/api/censo/crear
+
+/*********************************************/
+http://localhost:8080/api/usuario/get
+
+[
+    {
+        "usuarioId": 1,
+        "personaId": 0,
+        "nombres": "Gonchi Campos",
+        "apePaterno": null,
+        "apeMaterno": null,
+        "idRol": 1,
+        "email": null,
+        "fecNacimiento": null,
+        "password": "Server1",
+        "activo": false,
+        "usuario": "admin"
+    },
+    {
+        "usuarioId": 2,
+        "personaId": 0,
+        "nombres": "josue",
+        "apePaterno": "gavilan",
+        "apeMaterno": "gavilan",
+        "idRol": 1,
+        "email": "josue@pucp.pe",
+        "fecNacimiento": "2019-06-22",
+        "password": "Server123456",
+        "activo": true,
+        "usuario": "jtys"
+    }
+]
+
+/*********************************************/

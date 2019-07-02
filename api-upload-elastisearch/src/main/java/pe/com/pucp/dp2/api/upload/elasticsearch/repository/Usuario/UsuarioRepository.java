@@ -5,6 +5,7 @@
  */
 package pe.com.pucp.dp2.api.upload.elasticsearch.repository.Usuario;
 
+import java.util.List;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 
 /**
@@ -15,4 +16,6 @@ public interface UsuarioRepository {
     
     Boolean saveUsuario(UsuarioDTO u);
     Boolean login(UsuarioDTO u);
+
+    List<UsuarioDTO> getUsuarios();
 }
