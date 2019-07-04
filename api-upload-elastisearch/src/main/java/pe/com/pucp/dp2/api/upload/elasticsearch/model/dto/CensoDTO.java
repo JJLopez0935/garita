@@ -20,7 +20,7 @@ public class CensoDTO {
     private String estado;
     private int viviendas;
     private int vivEncuestadas;
-    private List<Formulario> formularios;
+    private List<Integer> formulariosId;
     
     public CensoDTO(){}
 
@@ -72,12 +72,12 @@ public class CensoDTO {
         this.vivEncuestadas = vivEncuestadas;
     }
 
-    public List<Formulario> getFormularios() {
-        return formularios;
+    public List<Integer> getFormulariosId() {
+        return formulariosId;
     }
 
-    public void setFormularios(List<Formulario> formularios) {
-        this.formularios = formularios;
+    public void setFormulariosId(List<Integer> formulariosId) {
+        this.formulariosId = formulariosId;
     }
     
     

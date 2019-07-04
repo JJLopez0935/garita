@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.Formulario;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.FormularioDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.Pregunta;
 
 /**
@@ -32,7 +32,7 @@ public class FormularioRepositoryImpl {
     @Autowired
     PreguntaRepositoryImpl preguntaRepositoryImpl;
     
-    public Boolean saveUsuario(Formulario f)  {
+    public Boolean saveUsuario(FormularioDTO f)  {
         
         
         try {

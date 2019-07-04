@@ -1,0 +1,62 @@
+[
+    {
+        "nombre":"formulario test",
+        "tipo":"tipo1",
+        "estado":"activo",
+        "preguntas":[
+          {
+            "tipoPregunta":"valor",
+            "pregunta":"¿Cuantos son 5?",
+            "clave":"integrantes",
+            "opciones":[
+            ]
+          },
+          {
+            "tipoPregunta":"fecha",
+            "pregunta":"¿A que hora duerm5en4 ?",
+            "clave":"horaDormir",
+            "opciones":[
+
+            ]
+          },
+          {
+            "tipoPregunta":"opciones",
+            "pregunta":"¿Quien ma5nda 4?",
+            "clave":"manda",
+            "opciones":[
+              "Papa", "mama", "otros"
+            ]
+          }
+        ]
+    },
+    {
+      "nombre":"formulario2",
+      "tipo":"tipo1",
+      "estado":"activo",
+      "preguntas":[
+        {
+          "tipoPregunta":"valor",
+          "pregunta":"¿Cuantos s5on 4?",
+          "clave":"integrantes",
+          "opciones":[
+          ]
+        },
+        {
+          "tipoPregunta":"fecha",
+          "pregunta":"¿A que hora d5uermen 4?",
+          "clave":"horaDormir",
+          "opciones":[
+
+          ]
+        },
+        {
+          "tipoPregunta":"opciones",
+          "pregunta":"¿Quien manda 4?",
+          "clave":"manda",
+          "opciones":[
+            "Papa", "mama", "tu vieja"
+          ]
+        }
+      ]
+    }
+]

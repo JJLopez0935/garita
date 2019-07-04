@@ -11,14 +11,14 @@ import java.util.List;
  *
  * @author johnny
  */
-public class Formulario {
+public class FormularioDTO {
  
     private String nombre;
     private String tipo;
     private String estado;
     private List<Pregunta> preguntas;
     
-    public Formulario(){}
+    public FormularioDTO(){}
 
     public String getNombre() {
         return nombre;

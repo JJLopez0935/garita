@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.CensoDTO;
-import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.Formulario;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.FormularioDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 
 /**
@@ -66,10 +66,8 @@ public class CensoRepositoryImpl {
             
             int censo = obtenerIdFormulario();
             
-            for(Formulario f: c.getFormularios()){
+            for(Integer f: c.getFormulariosId()){
                 
-                formularioRepositoryImpl.saveUsuario(f);
-                int forId = formularioRepositoryImpl.obtenerIdFormulario();
                 
                 String queryInsertOpcion = "INSERT INTO formulariosCenso"
                         + " (idCenso, idFormulario, activo)"
@@ -81,7 +79,7 @@ public class CensoRepositoryImpl {
                     public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException
                     {
                         ps.setInt(1, censo);
-                        ps.setInt(2, forId);
+                        ps.setInt(2, f);
                         ps.setBoolean(3, true);
                         
                         ps.executeUpdate();
@@ -95,10 +93,7 @@ public class CensoRepositoryImpl {
                 
                 
             }
-            
-            
-            
-            
+                   
             
             return true;
         } catch (SQLException ex) {

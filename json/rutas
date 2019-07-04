@@ -4,6 +4,7 @@ http://localhost:8080/api/usuario/insertar
 http://localhost:8080/api/vivienda/crear
 http://localhost:8080/api/residente/crear
 http://localhost:8080/api/censo/crear
+http://localhost:8080/api/formulario/crear
 
 /*********************************************/
 http://localhost:8080/api/usuario/get
