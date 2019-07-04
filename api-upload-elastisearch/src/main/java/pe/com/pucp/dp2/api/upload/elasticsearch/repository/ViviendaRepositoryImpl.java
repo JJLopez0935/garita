@@ -6,11 +6,18 @@
 package pe.com.pucp.dp2.api.upload.elasticsearch.repository;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ResidenteDTO;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ViviendaDTO;
 
 /**
@@ -52,6 +59,82 @@ public class ViviendaRepositoryImpl {
 
             }  
             });  
+    }
+    
+    
+    public List<ViviendaDTO> getViviendas() {
+        try{
+            String SQL = "select * from vivienda " +
+                         "inner join residente re " +
+                         "on vivienda.idVivienda = re.idVivienda";           
+
+            List <ViviendaDTO> students = jdbcTemplate.query(SQL, 
+               new ResultSetExtractor<List<ViviendaDTO>>(){
+
+               public List<ViviendaDTO> extractData(
+                  ResultSet rs) throws SQLException, DataAccessException {
+
+                  List<ViviendaDTO> list = new ArrayList<ViviendaDTO>();  
+                  while(rs.next()){ 
+                    ViviendaDTO vi = buscarVivienda(list, rs.getInt("idVivienda"));
+                    if(vi!=null){
+                        ResidenteDTO residente = new ResidenteDTO();
+                        residente.setIdResidente(rs.getInt("idResidente"));
+                        residente.setNombres(rs.getString("nombres"));
+                        residente.setApeMaterno(rs.getString("apeMaterno"));
+                        residente.setApePaterno(rs.getString("apePaterno"));
+                        residente.setFecNacimiento(rs.getDate("fecNacimiento"));
+                        residente.setGenero(rs.getString("genero"));
+                        residente.setEmail(rs.getString("email"));
+                        residente.setActivo(rs.getBoolean("activo"));
+                        vi.getResidentes().add(residente);
+
+                    }else{                        
+                        ViviendaDTO student = new ViviendaDTO();
+                        student.setActivo(rs.getBoolean("activo"));
+                        student.setIdVivienda(rs.getInt("idVivienda"));
+                        student.setDireccion(rs.getString("direccion"));
+                        student.setNombreContacto(rs.getString("nombreContacto"));
+                        student.setTelefonoContacto(rs.getString("telefonoContacto"));
+                        student.setIdRol(rs.getInt("idRol"));
+                        student.setEmail(rs.getString("email"));
+                        student.setUsuario(rs.getString("usuario"));
+                        student.setPassword(rs.getString("password"));
+
+                        
+                        
+                        ResidenteDTO residente = new ResidenteDTO();
+                        residente.setIdResidente(rs.getInt("idResidente"));
+                        residente.setNombres(rs.getString("nombres"));
+                        residente.setApeMaterno(rs.getString("apeMaterno"));
+                        residente.setApePaterno(rs.getString("apePaterno"));
+                        residente.setFecNacimiento(rs.getDate("fecNacimiento"));
+                        residente.setGenero(rs.getString("genero"));
+                        residente.setEmail(rs.getString("email"));
+                        residente.setActivo(rs.getBoolean("activo"));
+
+                        student.getResidentes().add(residente);
+                        list.add(student); 
+                    }
+
+                  }  
+                  return list;  
+               }    	  
+            });
+            return students;
+        }catch(Exception ex){
+            System.out.println(ex);
+            return null;
+        }
+        
+    }
+    
+    private ViviendaDTO buscarVivienda(List<ViviendaDTO> list, int id){
+        for(ViviendaDTO v: list){
+            if(v.getIdVivienda() == id)
+                return v;            
+        }
+        return null;
     }
     
 }

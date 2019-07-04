@@ -5,6 +5,9 @@
  */
 package pe.com.pucp.dp2.api.upload.elasticsearch.model.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author johnny
@@ -20,8 +23,11 @@ public class ViviendaDTO {
     private String email;
     private String usuario;
     private String password;
+    private List<ResidenteDTO> residentes;
     
-    public ViviendaDTO(){}
+    public ViviendaDTO(){
+        residentes = new ArrayList<ResidenteDTO>();
+    }
 
     public int getIdVivienda() {
         return idVivienda;
@@ -93,6 +99,14 @@ public class ViviendaDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<ResidenteDTO> getResidentes() {
+        return residentes;
+    }
+
+    public void setResidentes(List<ResidenteDTO> residentes) {
+        this.residentes = residentes;
     }
     
     
