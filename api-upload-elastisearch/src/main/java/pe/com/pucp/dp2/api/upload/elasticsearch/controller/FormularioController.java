@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.bean.ResponseGeneral;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.FormularioDTO;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ViviendaDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.repository.FormularioRepositoryImpl;
 
 /**
@@ -45,6 +46,23 @@ public class FormularioController {
             System.out.println(e.toString());
             StringWriter sw = new StringWriter();
             return new ResponseEntity<>(new ResponseGeneral(500, sw.toString(), null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+    
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<FormularioDTO>> getUsuarios() {
+        try{
+            
+            return new ResponseEntity<>(formularioRepositoryImpl.getFormularios(), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println("error");
+            System.out.println(e);
+            System.out.println(e.toString());
+            System.out.println(e.getCause());
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
 

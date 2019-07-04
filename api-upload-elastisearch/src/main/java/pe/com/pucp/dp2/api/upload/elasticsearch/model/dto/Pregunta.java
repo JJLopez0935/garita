@@ -5,6 +5,7 @@
  */
 package pe.com.pucp.dp2.api.upload.elasticsearch.model.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,12 +14,15 @@ import java.util.List;
  */
 public class Pregunta {
     
+    private int idPregunta;
     private String tipoPregunta;
     private String pregunta;
     private String clave;
     private List<String> opciones;
     
-    public Pregunta(){}
+    public Pregunta(){
+        opciones = new ArrayList<>();
+    }
 
     public String getTipoPregunta() {
         return tipoPregunta;
@@ -50,6 +54,14 @@ public class Pregunta {
 
     public void setOpciones(List<String> opciones) {
         this.opciones = opciones;
+    }
+
+    public int getIdPregunta() {
+        return idPregunta;
+    }
+
+    public void setIdPregunta(int idPregunta) {
+        this.idPregunta = idPregunta;
     }
     
     

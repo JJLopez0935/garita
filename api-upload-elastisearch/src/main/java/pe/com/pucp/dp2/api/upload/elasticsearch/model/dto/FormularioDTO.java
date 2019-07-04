@@ -5,6 +5,7 @@
  */
 package pe.com.pucp.dp2.api.upload.elasticsearch.model.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,12 +14,15 @@ import java.util.List;
  */
 public class FormularioDTO {
  
+    private int idFormulario;
     private String nombre;
     private String tipo;
     private String estado;
     private List<Pregunta> preguntas;
     
-    public FormularioDTO(){}
+    public FormularioDTO(){
+        preguntas = new ArrayList<Pregunta>();
+    }
 
     public String getNombre() {
         return nombre;
@@ -50,6 +54,14 @@ public class FormularioDTO {
 
     public void setPreguntas(List<Pregunta> preguntas) {
         this.preguntas = preguntas;
+    }
+
+    public int getIdFormulario() {
+        return idFormulario;
+    }
+
+    public void setIdFormulario(int idFormulario) {
+        this.idFormulario = idFormulario;
     }
     
           
