@@ -7,6 +7,13 @@ http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/residente/crear
 http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/formulario/crear
 http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/censo/crear
 
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/usuario/actualizar
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/rol/actualizar
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/vivienda/actualizar
+
+/***************** GET ****************************/
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/rol/get
+
 /***************** GET ****************************/
 http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/usuario/get
 
