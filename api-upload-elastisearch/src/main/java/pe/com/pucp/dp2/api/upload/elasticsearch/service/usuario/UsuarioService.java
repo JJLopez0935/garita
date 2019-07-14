@@ -6,6 +6,7 @@
 package pe.com.pucp.dp2.api.upload.elasticsearch.service.usuario;
 
 import java.util.List;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.LoginDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 
 /**
@@ -15,7 +16,7 @@ import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 public interface UsuarioService {
     
     boolean saveUsuario(UsuarioDTO u);
-    boolean login(UsuarioDTO u);
+    LoginDTO login(UsuarioDTO u);
     List<UsuarioDTO> listUsuarios();
     
 }

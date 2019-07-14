@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.bean.ResponseGeneral;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.LoginDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.service.usuario.UsuarioService;
 
@@ -38,20 +39,19 @@ public class UsuarioController {
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<ResponseGeneral> login(@RequestBody @Valid @NotNull  UsuarioDTO usuarioDto) {
+    public ResponseEntity<LoginDTO> login(@RequestBody @Valid @NotNull  UsuarioDTO usuarioDto) {
         try{
-            if(usuarioService.login(usuarioDto))
-                
-                return new ResponseEntity<>(new ResponseGeneral(200, "Éxito", null), HttpStatus.OK);
-            else
-                return new ResponseEntity<>(new ResponseGeneral(403, "No se encuentra registrado usuario", null), HttpStatus.NOT_ACCEPTABLE);
+            
+            return new ResponseEntity<>(usuarioService.login(usuarioDto), HttpStatus.OK);
+            
+           
             
         }catch (Exception e){
             System.out.println("error");
             System.out.println(e);
             System.out.println(e.toString());
             StringWriter sw = new StringWriter();
-            return new ResponseEntity<>(new ResponseGeneral(500, sw.toString(), null), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new LoginDTO(500, e.toString()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
 

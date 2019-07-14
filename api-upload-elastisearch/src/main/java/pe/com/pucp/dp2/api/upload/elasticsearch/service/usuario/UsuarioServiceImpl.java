@@ -8,6 +8,7 @@ package pe.com.pucp.dp2.api.upload.elasticsearch.service.usuario;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.LoginDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.repository.Usuario.UsuarioRepository;
 
@@ -28,7 +29,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public boolean login(UsuarioDTO u) {
+    public LoginDTO login(UsuarioDTO u) {
         return usuarioRepository.login(u);
     }
 

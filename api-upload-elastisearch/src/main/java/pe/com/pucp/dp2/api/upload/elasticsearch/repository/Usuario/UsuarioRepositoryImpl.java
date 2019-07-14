@@ -19,6 +19,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.LoginDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ViviendaDTO;
 
@@ -69,60 +70,89 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
     }
 
     @Override
-    public Boolean login(UsuarioDTO u) {
+    public LoginDTO login(UsuarioDTO u) {
+        
+        System.out.println("llega a login");
        
             String SQL = "select * from usuario where usuario = '" +  u.getUsuario() + 
                          "' and password = '" + u.getPassword() + "'";
             
             
             
-            List <UsuarioDTO> students = jdbcTemplate.query(SQL, 
-               new ResultSetExtractor<List<UsuarioDTO>>(){
+            LoginDTO students = jdbcTemplate.query(SQL, 
+               new ResultSetExtractor<LoginDTO>(){
 
-               public List<UsuarioDTO> extractData(
+               public LoginDTO extractData(
                   ResultSet rs) throws SQLException, DataAccessException {
 
-                  List<UsuarioDTO> list = new ArrayList<UsuarioDTO>();  
-                  while(rs.next()){  
-                     UsuarioDTO student = new UsuarioDTO();
+                  LoginDTO student = new LoginDTO();
+                  if(rs.next()){  
                      
-                     list.add(student);  
+                     student.setId(rs.getInt("idUsuario"));
+                     if(rs.getInt("idUsuario") == 1){
+                        student.setIdRol(rs.getInt("idRol"));
+                        student.setPassword(rs.getString("password"));
+                        student.setUsuario(rs.getString("usuario"));
+                     }else{
+                        student.setIdRol(rs.getInt("idRol")); 
+                        student.setEmail(rs.getString("email")); 
+                        student.setNombre(rs.getString("nombres").concat(" ").concat(rs.getString("apePaterno")).concat(" ").concat(rs.getString("apeMaterno")));
+                        student.setPassword(rs.getString("password"));
+                        student.setUsuario(rs.getString("usuario"));
+                     }
+                     
+                     return student; 
                   }  
-                  return list;  
+                  return null;
                }    	  
             });
             
-            if(students.size()>0){
-                return true;
+            if(students != null){
+                
+                students.setCode(200);
+                students.setMsg("Éxito");
+                return students;
             }else{
                 String SQL2 = "select * from vivienda where usuario = '" +  u.getUsuario() + 
                          "' and password = '" + u.getPassword() + "'";
                         
-            
-                List <ViviendaDTO> students2 = jdbcTemplate.query(SQL2, 
-                   new ResultSetExtractor<List<ViviendaDTO>>(){
+           
+                students = jdbcTemplate.query(SQL2, 
+                new ResultSetExtractor<LoginDTO>(){
 
-                   public List<ViviendaDTO> extractData(
-                      ResultSet rs) throws SQLException, DataAccessException {
+                public LoginDTO extractData(
+                    ResultSet rs) throws SQLException, DataAccessException {
 
-                      List<ViviendaDTO> list2 = new ArrayList<ViviendaDTO>();  
-                      while(rs.next()){  
-                         ViviendaDTO student = new ViviendaDTO();
-
-                         list2.add(student);  
-                      }  
-                      return list2;  
-                   }    	  
+                        LoginDTO student = new LoginDTO(); 
+                        if(rs.next()){  
+                            
+                           
+                           student.setId(rs.getInt("idVivienda")); 
+                           student.setIdRol(rs.getInt("idRol")); 
+                           student.setEmail(rs.getString("email")); 
+                           student.setNombre(rs.getString("nombreContacto"));
+                           student.setPassword(rs.getString("password"));
+                           student.setUsuario(rs.getString("usuario"));
+                           return student; 
+                        }  
+                        return null;
+                    }    	  
                 });
                 
-                if(students2.size()>0)
-                    return true;
-                else
-                    return false;
-            }
+                if(students!=null){
+                    students.setCode(200);
+                    students.setMsg("Éxito");
+                    return students;
+                }else{
+                    System.out.println("no encontro nda");
+                    LoginDTO loginDTO = new LoginDTO();
+                    loginDTO.setCode(303);
+                    loginDTO.setMsg("No se encuentra registrado usuario");
+                    return loginDTO;
+                }
+                    
+            }            
             
-            
-       
         
         
     }
