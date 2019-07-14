@@ -313,3 +313,22 @@ http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/censo/get
         ]
     }
 ]
+
+/***************** GET ****************************/
+
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/residente/get
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/residente/getById?id=2
+
+[
+    {
+        "idResidente": 2,
+        "idVivienda": 0,
+        "nombres": "beja",
+        "apeMaterno": "horna",
+        "apePaterno": "locrero",
+        "fecNacimiento": "2019-06-22",
+        "genero": "chivo",
+        "email": "josue@pucp.pe",
+        "activo": true
+    }
+]

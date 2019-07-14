@@ -6,6 +6,7 @@
 package pe.com.pucp.dp2.api.upload.elasticsearch.controller;
 
 import java.io.StringWriter;
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.bean.ResponseGeneral;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.RolDTO;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.repository.RolRepositoryImpl;
 
 /**
@@ -50,5 +52,21 @@ public class RolController {
 
     }
     
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<RolDTO>> getUsuarios() {
+        try{
+            
+            return new ResponseEntity<>(rolRepositoryImpl.getUsuarios(), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println("error");
+            System.out.println(e);
+            System.out.println(e.toString());
+            StringWriter sw = new StringWriter();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
     
 }
