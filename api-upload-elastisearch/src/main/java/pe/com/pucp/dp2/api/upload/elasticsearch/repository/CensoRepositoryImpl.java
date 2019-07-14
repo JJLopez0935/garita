@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.CensoDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.FormularioDTO;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.Pregunta;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 
 /**
@@ -135,26 +136,44 @@ public class CensoRepositoryImpl {
               ResultSet rs) throws SQLException, DataAccessException {
 
               List<CensoDTO> list = new ArrayList<CensoDTO>();  
-              while(rs.next()){  
-                 CensoDTO student = new CensoDTO();
-//                student.setActivo(rs.getBoolean("activo"));
-//                student.setApeMaterno(rs.getString("apePaterno")); 
-//                student.setApePaterno(rs.getString("apeMaterno"));
-//                student.setEmail(rs.getString("email"));
-//                student.setFecNacimiento(rs.getDate("fecNacimiento"));
-//                student.setIdRol(rs.getInt("idRol"));
-//                student.setNombres(rs.getString("nombres"));
-//                student.setPassword(rs.getString("password"));
-//                student.setUsuario(rs.getString("usuario"));
-//                student.setUsuarioId(rs.getInt("idUsuario"));
-                 list.add(student);  
+              while(rs.next()){ 
+                    CensoDTO vi = buscarFormulario(list, rs.getInt("idCenso"));
+                    if(vi!=null){                       
+                        
+                        vi.getFormulariosId().add(rs.getInt("idFormulario"));
+                        vi.getFormularios().add(formularioRepositoryImpl.getFormularioById(String.valueOf(rs.getInt("idFormulario"))));
+                        
 
-                 
-              }  
+                    }else{                        
+                        CensoDTO student = new CensoDTO();
+                        student.setEstado(rs.getString("estado"));
+                        student.setFechaInicio(rs.getDate("fechaInicio"));
+                        student.setFechaRegistro(rs.getDate("fechaRegistro"));
+                        student.setIdCenso(rs.getInt("idCenso"));
+                        student.setPeriodo(rs.getInt("periodo"));
+                        student.setVivEncuestadas(rs.getInt("vivEncuestadas"));
+                        student.setViviendas(rs.getInt("viviendas"));                        
+                      
+                        
+                        student.getFormulariosId().add(rs.getInt("idFormulario"));
+                        System.out.println("se enviara " + String.valueOf(rs.getInt("idFormulario")));
+                        student.getFormularios().add(formularioRepositoryImpl.getFormularioById(String.valueOf(rs.getInt("idFormulario"))));
+                        list.add(student); 
+                    }
+
+                  }
               return list;  
            }    	  
         });
         return students;
+    }
+    
+    private CensoDTO buscarFormulario(List<CensoDTO> list, int id){
+        for(CensoDTO v: list){
+            if(v.getIdCenso() == id)
+                return v;            
+        }
+        return null;
     }
     
 }

@@ -6,6 +6,7 @@
 package pe.com.pucp.dp2.api.upload.elasticsearch.model.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,16 @@ import java.util.List;
  * @author johnny
  */
 public class CensoDTO {
+
+    public List<FormularioDTO> getFormularios() {
+        return formularios;
+    }
+
+    public void setFormularios(List<FormularioDTO> formularios) {
+        this.formularios = formularios;
+    }
     
+    private int idCenso;
     private Date fechaRegistro;
     private Date fechaInicio;
     private int periodo;
@@ -21,8 +31,12 @@ public class CensoDTO {
     private int viviendas;
     private int vivEncuestadas;
     private List<Integer> formulariosId;
+    private List<FormularioDTO> formularios;
     
-    public CensoDTO(){}
+    public CensoDTO(){
+        formulariosId = new ArrayList<>();
+        formularios = new ArrayList<>();
+    }
 
     public Date getFechaRegistro() {
         return fechaRegistro;
@@ -78,6 +92,14 @@ public class CensoDTO {
 
     public void setFormulariosId(List<Integer> formulariosId) {
         this.formulariosId = formulariosId;
+    }
+
+    public int getIdCenso() {
+        return idCenso;
+    }
+
+    public void setIdCenso(int idCenso) {
+        this.idCenso = idCenso;
     }
     
     

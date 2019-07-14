@@ -1,3 +1,4 @@
+METODOS POST
 http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/rol/crear
 http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/usuario/login
 http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/usuario/insertar
@@ -7,7 +8,7 @@ http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/formulario/crear
 http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/censo/crear
 
 /***************** GET ****************************/
-http://localhost:8080/api/usuario/get
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/usuario/get
 
 [
     {
@@ -135,6 +136,179 @@ http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/vivienda/get
                 "genero": "chivo",
                 "email": "josue@gg.com",
                 "activo": true
+            }
+        ]
+    }
+]
+
+/***************** GET ****************************/
+//Formulario por ID
+
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/formulario/getById?id=2
+
+{
+    "idFormulario": 2,
+    "nombre": "formulario2",
+    "tipo": "tipo1",
+    "estado": "activo",
+    "preguntas": [
+        {
+            "idPregunta": 4,
+            "tipoPregunta": "valor",
+            "pregunta": "¿Cuantos s5on 4?",
+            "clave": "integrantes",
+            "opciones": []
+        },
+        {
+            "idPregunta": 5,
+            "tipoPregunta": "fecha",
+            "pregunta": "¿A que hora d5uermen 4?",
+            "clave": "horaDormir",
+            "opciones": []
+        },
+        {
+            "idPregunta": 6,
+            "tipoPregunta": "opciones",
+            "pregunta": "¿Quien manda 4?",
+            "clave": "manda",
+            "opciones": [
+                "Papa",
+                "mama",
+                "tu vieja"
+            ]
+        }
+    ]
+}
+
+/***************** GET ****************************/
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/censo/get
+
+[
+    {
+        "idCenso": 1,
+        "fechaRegistro": "2020-01-03",
+        "fechaInicio": "2020-01-03",
+        "periodo": 1,
+        "estado": "1",
+        "viviendas": 1,
+        "vivEncuestadas": 1,
+        "formulariosId": [
+            1
+        ],
+        "formularios": [
+            {
+                "idFormulario": 1,
+                "nombre": "formulario test",
+                "tipo": "tipo1",
+                "estado": "activo",
+                "preguntas": [
+                    {
+                        "idPregunta": 1,
+                        "tipoPregunta": "valor",
+                        "pregunta": "¿Cuantos son 5?",
+                        "clave": "integrantes",
+                        "opciones": []
+                    },
+                    {
+                        "idPregunta": 2,
+                        "tipoPregunta": "fecha",
+                        "pregunta": "¿A que hora duerm5en4 ?",
+                        "clave": "horaDormir",
+                        "opciones": []
+                    },
+                    {
+                        "idPregunta": 3,
+                        "tipoPregunta": "opciones",
+                        "pregunta": "¿Quien ma5nda 4?",
+                        "clave": "manda",
+                        "opciones": [
+                            "Papa",
+                            "mama",
+                            "otros"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idCenso": 2,
+        "fechaRegistro": "2020-01-03",
+        "fechaInicio": "2020-01-03",
+        "periodo": 1,
+        "estado": "1",
+        "viviendas": 1,
+        "vivEncuestadas": 1,
+        "formulariosId": [
+            1,
+            2
+        ],
+        "formularios": [
+            {
+                "idFormulario": 1,
+                "nombre": "formulario test",
+                "tipo": "tipo1",
+                "estado": "activo",
+                "preguntas": [
+                    {
+                        "idPregunta": 1,
+                        "tipoPregunta": "valor",
+                        "pregunta": "¿Cuantos son 5?",
+                        "clave": "integrantes",
+                        "opciones": []
+                    },
+                    {
+                        "idPregunta": 2,
+                        "tipoPregunta": "fecha",
+                        "pregunta": "¿A que hora duerm5en4 ?",
+                        "clave": "horaDormir",
+                        "opciones": []
+                    },
+                    {
+                        "idPregunta": 3,
+                        "tipoPregunta": "opciones",
+                        "pregunta": "¿Quien ma5nda 4?",
+                        "clave": "manda",
+                        "opciones": [
+                            "Papa",
+                            "mama",
+                            "otros"
+                        ]
+                    }
+                ]
+            },
+            {
+                "idFormulario": 2,
+                "nombre": "formulario2",
+                "tipo": "tipo1",
+                "estado": "activo",
+                "preguntas": [
+                    {
+                        "idPregunta": 4,
+                        "tipoPregunta": "valor",
+                        "pregunta": "¿Cuantos s5on 4?",
+                        "clave": "integrantes",
+                        "opciones": []
+                    },
+                    {
+                        "idPregunta": 5,
+                        "tipoPregunta": "fecha",
+                        "pregunta": "¿A que hora d5uermen 4?",
+                        "clave": "horaDormir",
+                        "opciones": []
+                    },
+                    {
+                        "idPregunta": 6,
+                        "tipoPregunta": "opciones",
+                        "pregunta": "¿Quien manda 4?",
+                        "clave": "manda",
+                        "opciones": [
+                            "Papa",
+                            "mama",
+                            "tu vieja"
+                        ]
+                    }
+                ]
             }
         ]
     }
