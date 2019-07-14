@@ -8,11 +8,15 @@ package pe.com.pucp.dp2.api.upload.elasticsearch.repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.CensoDTO;
@@ -117,6 +121,40 @@ public class CensoRepositoryImpl {
         
        
         
+    }
+    
+    public List<CensoDTO> getCensos() {
+        String SQL = "select * from censo " +
+                    "inner join formulariosCenso fc " +
+                    "on censo.idCenso = fc.idCenso";           
+            
+        List <CensoDTO> students = jdbcTemplate.query(SQL, 
+           new ResultSetExtractor<List<CensoDTO>>(){
+
+           public List<CensoDTO> extractData(
+              ResultSet rs) throws SQLException, DataAccessException {
+
+              List<CensoDTO> list = new ArrayList<CensoDTO>();  
+              while(rs.next()){  
+                 CensoDTO student = new CensoDTO();
+//                student.setActivo(rs.getBoolean("activo"));
+//                student.setApeMaterno(rs.getString("apePaterno")); 
+//                student.setApePaterno(rs.getString("apeMaterno"));
+//                student.setEmail(rs.getString("email"));
+//                student.setFecNacimiento(rs.getDate("fecNacimiento"));
+//                student.setIdRol(rs.getInt("idRol"));
+//                student.setNombres(rs.getString("nombres"));
+//                student.setPassword(rs.getString("password"));
+//                student.setUsuario(rs.getString("usuario"));
+//                student.setUsuarioId(rs.getInt("idUsuario"));
+                 list.add(student);  
+
+                 
+              }  
+              return list;  
+           }    	  
+        });
+        return students;
     }
     
 }

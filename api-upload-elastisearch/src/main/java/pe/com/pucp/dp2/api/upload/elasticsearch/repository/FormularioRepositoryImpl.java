@@ -224,6 +224,71 @@ public class FormularioRepositoryImpl {
         
         return opciones;
     }
+    
+    public FormularioDTO getFormularioById(String id) {
+        try{
+            String SQL = "select * from formulario f " +
+                         "inner join preguntaFormulario pFo on pFo.idFormulario = f.idFormulario " +
+                         "inner join pregunta p on p.idPregunta = pFo.idPregunta " +
+                         "where f.idFormulario="+id;           
+
+            FormularioDTO students = jdbcTemplate.query(SQL, 
+               new ResultSetExtractor<FormularioDTO>(){
+
+               public FormularioDTO extractData(
+                  ResultSet rs) throws SQLException, DataAccessException {
+
+                  int cont=0;
+                  FormularioDTO student = new FormularioDTO();
+                  while(rs.next()){ 
+                    
+                    if(cont>0){
+                        Pregunta residente = new Pregunta();
+                        residente.setIdPregunta(rs.getInt("idPregunta"));
+                        residente.setTipoPregunta(rs.getString("TipoPregunta"));
+                        residente.setPregunta(rs.getString("pregunta"));
+                        residente.setClave(rs.getString("clave"));
+                        
+                        
+                        if(residente.getTipoPregunta().equals("opciones")){                            
+                            residente.setOpciones(getOpciones(residente.getIdPregunta()));
+                        }
+                        
+                        student.getPreguntas().add(residente);
+
+                    }else{                        
+                        
+                        student.setIdFormulario(rs.getInt("idFormulario"));
+                        student.setNombre(rs.getString("nombre"));
+                        student.setTipo(rs.getString("tipo"));
+                        student.setEstado(rs.getString("estado"));
+                        
+                      
+                        Pregunta residente = new Pregunta();
+                        residente.setIdPregunta(rs.getInt("idPregunta"));
+                        residente.setTipoPregunta(rs.getString("TipoPregunta"));
+                        residente.setPregunta(rs.getString("pregunta"));
+                        residente.setClave(rs.getString("clave"));
+                        
+                        if(residente.getTipoPregunta().equals("opciones")){                            
+                            residente.setOpciones(getOpciones(residente.getIdPregunta()));
+                        }
+                        
+
+                        student.getPreguntas().add(residente);
+                        
+                    }
+cont++;
+                  }  
+                  return student;  
+               }    	  
+            });
+            return students;
+        }catch(Exception ex){
+            System.out.println(ex);
+            return null;
+        }
+    }
    
     
 }

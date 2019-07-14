@@ -6,7 +6,7 @@ http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/residente/crear
 http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/formulario/crear
 http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/censo/crear
 
-/*********************************************/
+/***************** GET ****************************/
 http://localhost:8080/api/usuario/get
 
 [
@@ -38,4 +38,104 @@ http://localhost:8080/api/usuario/get
     }
 ]
 
-/*********************************************/
+/***************** GET ****************************/
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/formulario/get
+[
+    {
+        "idFormulario": 1,
+        "nombre": "formulario test",
+        "tipo": "tipo1",
+        "estado": "activo",
+        "preguntas": [
+            {
+                "idPregunta": 1,
+                "tipoPregunta": "valor",
+                "pregunta": "¿Cuantos son 5?",
+                "clave": "integrantes",
+                "opciones": []
+            },
+            {
+                "idPregunta": 2,
+                "tipoPregunta": "fecha",
+                "pregunta": "¿A que hora duerm5en4 ?",
+                "clave": "horaDormir",
+                "opciones": []
+            },
+            {
+                "idPregunta": 3,
+                "tipoPregunta": "opciones",
+                "pregunta": "¿Quien ma5nda 4?",
+                "clave": "manda",
+                "opciones": [
+                    "Papa",
+                    "mama",
+                    "otros"
+                ]
+            }
+        ]
+    },
+    {
+        "idFormulario": 2,
+        "nombre": "formulario2",
+        "tipo": "tipo1",
+        "estado": "activo",
+        "preguntas": [
+            {
+                "idPregunta": 4,
+                "tipoPregunta": "valor",
+                "pregunta": "¿Cuantos s5on 4?",
+                "clave": "integrantes",
+                "opciones": []
+            },
+            {
+                "idPregunta": 5,
+                "tipoPregunta": "fecha",
+                "pregunta": "¿A que hora d5uermen 4?",
+                "clave": "horaDormir",
+                "opciones": []
+            },
+            {
+                "idPregunta": 6,
+                "tipoPregunta": "opciones",
+                "pregunta": "¿Quien manda 4?",
+                "clave": "manda",
+                "opciones": [
+                    "Papa",
+                    "mama",
+                    "tu vieja"
+                ]
+            }
+        ]
+    }
+]
+
+
+/***************** GET ****************************/
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/vivienda/get
+
+[
+    {
+        "idVivienda": 1,
+        "direccion": "av. peru 23",
+        "nombreContacto": "josue tys",
+        "telefonoContacto": "53424785",
+        "activo": true,
+        "idRol": 1,
+        "email": "josue@gg.com",
+        "usuario": "vivienda1",
+        "password": "Server1",
+        "residentes": [
+            {
+                "idResidente": 2,
+                "idVivienda": 0,
+                "nombres": "beja",
+                "apeMaterno": "horna",
+                "apePaterno": "locrero",
+                "fecNacimiento": "2019-06-23",
+                "genero": "chivo",
+                "email": "josue@gg.com",
+                "activo": true
+            }
+        ]
+    }
+]
