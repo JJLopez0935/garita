@@ -1,10 +1,10 @@
-http://localhost:8080/api/rol/crear
-http://localhost:8080/api/usuario/login
-http://localhost:8080/api/usuario/insertar
-http://localhost:8080/api/vivienda/crear
-http://localhost:8080/api/residente/crear
-http://localhost:8080/api/censo/crear
-http://localhost:8080/api/formulario/crear
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/rol/crear
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/usuario/login
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/usuario/insertar
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/vivienda/crear
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/residente/crear
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/formulario/crear
+http://ec2-52-91-98-76.compute-1.amazonaws.com:8080/api/censo/crear
 
 /*********************************************/
 http://localhost:8080/api/usuario/get
