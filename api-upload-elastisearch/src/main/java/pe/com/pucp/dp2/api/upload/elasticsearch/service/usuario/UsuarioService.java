@@ -18,5 +18,5 @@ public interface UsuarioService {
     boolean saveUsuario(UsuarioDTO u);
     LoginDTO login(UsuarioDTO u);
     List<UsuarioDTO> listUsuarios();
-    
+    boolean actualizarUsuario(UsuarioDTO u);
 }

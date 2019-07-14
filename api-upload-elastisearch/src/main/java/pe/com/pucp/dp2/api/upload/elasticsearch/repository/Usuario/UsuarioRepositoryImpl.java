@@ -219,5 +219,35 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
         });
         return students;
     }
+
+    @Override
+    public Boolean actualizarUsuario(UsuarioDTO u) {
+        System.out.println("entra actualizar");
+        String query = "update usuario"
+                + " set nombres = ?, apePaterno = ?, apeMaterno = ?, fecNacimiento = ?, email = ?, activo = ?, idRol = ? "
+                + ", password = ?, fecRegistro = Curdate() "
+                + " where usuario = ?";
+        System.out.println("pasa");
+        
+            return jdbcTemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
+                @Override  
+                public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException   
+                         {  
+                   
+                        
+                        ps.setString(1, u.getNombres());
+                        ps.setString(2, u.getApeMaterno());
+                        ps.setString(3, u.getApeMaterno());
+                        ps.setDate(4, u.getFecNacimiento());
+                        ps.setString(5, u.getEmail());
+                        ps.setBoolean(6, u.isActivo());
+                        ps.setInt(7, u.getIdRol());
+                        ps.setString(8, u.getPassword());
+                        ps.setString(9, u.getUsuario());
+                        return ps.execute();
+                        
+                }  
+                });  
+    }
     
 }

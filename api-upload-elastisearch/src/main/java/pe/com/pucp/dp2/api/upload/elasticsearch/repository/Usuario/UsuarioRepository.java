@@ -19,4 +19,5 @@ public interface UsuarioRepository {
     LoginDTO login(UsuarioDTO u);
 
     List<UsuarioDTO> getUsuarios();
+    Boolean actualizarUsuario(UsuarioDTO u);
 }

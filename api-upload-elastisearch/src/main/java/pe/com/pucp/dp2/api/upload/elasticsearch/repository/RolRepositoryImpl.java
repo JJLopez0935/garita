@@ -52,7 +52,7 @@ public class RolRepositoryImpl implements RolRepository{
     }
     
     public List<RolDTO> getUsuarios() {
-        String SQL = "select * from usuario";           
+        String SQL = "select * from rol";           
             
         List <RolDTO> students = jdbcTemplate.query(SQL, 
            new ResultSetExtractor<List<RolDTO>>(){

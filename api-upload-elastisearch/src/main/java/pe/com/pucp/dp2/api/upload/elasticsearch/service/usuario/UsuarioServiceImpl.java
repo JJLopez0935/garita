@@ -37,5 +37,10 @@ public class UsuarioServiceImpl implements UsuarioService{
     public List<UsuarioDTO> listUsuarios() {
         return usuarioRepository.getUsuarios();
     }
+
+    @Override
+    public boolean actualizarUsuario(UsuarioDTO u) {
+        return usuarioRepository.actualizarUsuario(u);
+    }
     
 }

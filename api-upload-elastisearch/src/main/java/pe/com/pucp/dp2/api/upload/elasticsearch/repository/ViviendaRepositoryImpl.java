@@ -223,5 +223,37 @@ public class ViviendaRepositoryImpl {
         
         return true;
     }
+
+    public boolean actualizarUsuario(ViviendaDTO usuarioDto) {
+        
+        
+        
+        String query = "update vivienda"
+        + " set direccion = ?, nombreContacto = ?, telefonoContacto = ?, activo = ?, idRol = ?, email = ?, password = ?, fecRegistro = Curdate() "
+        + " where usuario = ?";
+        
+            
+        
+        return jdbcTemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
+            @Override  
+            public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException  
+                     {  
+                ps.setString(1, usuarioDto.getDireccion());  
+                ps.setString(2, usuarioDto.getNombreContacto());  
+                ps.setString(3, usuarioDto.getTelefonoContacto());
+                ps.setBoolean(4, usuarioDto.isActivo()); 
+                ps.setInt(5, usuarioDto.getIdRol()); 
+                ps.setString(6, usuarioDto.getEmail());
+                ps.setString(7, usuarioDto.getPassword());
+ps.setString(8, usuarioDto.getUsuario());
+                return ps.execute();  
+
+            }  
+            });  
+        }
+        
+       
     
-}
+    
+    
+    }

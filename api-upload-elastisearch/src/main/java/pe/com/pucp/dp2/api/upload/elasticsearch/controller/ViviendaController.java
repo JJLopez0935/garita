@@ -112,4 +112,25 @@ public class ViviendaController {
 
     }
     
+    @RequestMapping(value = "/actualizar", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<ResponseGeneral> actualizarUsuario(@RequestBody @Valid @NotNull ViviendaDTO usuarioDto) {
+        try{
+            
+            
+            viviendaRepositoryImpl.actualizarUsuario(usuarioDto);
+            return new ResponseEntity<>(new ResponseGeneral(200, "Modificado satisfactoriamente", null), HttpStatus.OK);
+            
+            
+        }catch (Exception e){
+            System.out.println("error");
+            System.out.println(e);
+            System.out.println(e.toString());
+            StringWriter sw = new StringWriter();
+            return new ResponseEntity<>(new ResponseGeneral(500, sw.toString(), null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+    
 }
