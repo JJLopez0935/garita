@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.bean.ResponseGeneral;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ViviendaDTO;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ViviendaRespuestaDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.repository.ViviendaRepositoryImpl;
 
 /**
@@ -64,6 +65,43 @@ public class ViviendaController {
             System.out.println(e.toString());
             System.out.println(e.getCause());
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+    
+    @RequestMapping(value = "/crearRespuestaVivienda", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<ResponseGeneral> crearRespuestaVivienda(@RequestBody @Valid @NotNull ViviendaRespuestaDTO usuarioDto) {
+        try{
+            
+            viviendaRepositoryImpl.crearCensoVivienda(usuarioDto);
+            return new ResponseEntity<>(new ResponseGeneral(200, "Insertado satisfactoriamente", null), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println("error");
+            System.out.println(e);
+            System.out.println(e.toString());
+            StringWriter sw = new StringWriter();
+            return new ResponseEntity<>(new ResponseGeneral(500, sw.toString(), null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+    
+    
+    @RequestMapping(value = "/insertarRespuesta", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<ResponseGeneral> insertarVivienda(@RequestBody @Valid @NotNull List<ViviendaRespuestaDTO> usuarioDto) {
+        try{
+            
+            viviendaRepositoryImpl.updateViviendaRespuesta(usuarioDto);
+            return new ResponseEntity<>(new ResponseGeneral(200, "Insertado satisfactoriamente", null), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println("error");
+            System.out.println(e);
+            System.out.println(e.toString());
+            StringWriter sw = new StringWriter();
+            return new ResponseEntity<>(new ResponseGeneral(500, sw.toString(), null), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
 

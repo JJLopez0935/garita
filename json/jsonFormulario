@@ -3,8 +3,7 @@
         "nombre":"formulario test",
         "tipo":"tipo1",
         "estado":"activo",
-        "preguntas":[
-          {
+        "preguntas":[ {
             "tipoPregunta":"valor",
             "pregunta":"¿Cuantos son 5?",
             "clave":"integrantes",

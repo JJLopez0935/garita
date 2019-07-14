@@ -17,8 +17,8 @@ import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ResidenteDTO;
-import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ViviendaDTO;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ViviendaRespuestaDTO;
 
 /**
  *
@@ -29,7 +29,7 @@ public class ViviendaRepositoryImpl {
     
     
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    JdbcTemplate jdbcTemplate;    
     
     public Boolean saveUsuario(ViviendaDTO v) {
         
@@ -135,6 +135,63 @@ public class ViviendaRepositoryImpl {
                 return v;            
         }
         return null;
+    }
+    
+    
+    public boolean crearCensoVivienda(ViviendaRespuestaDTO viviendaRespuestaDTO){       
+        
+        List<ViviendaDTO> viviendasActuales = getViviendas();
+        
+        for(ViviendaDTO vivi: viviendasActuales){
+            
+            String query = "INSERT INTO censoVivienda"
+                + " (idCenso, idVivienda, estado) "
+                + " VALUE(?,?,?)";
+        
+         
+            jdbcTemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
+                @Override  
+                public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException{  
+                    ps.setInt(1, viviendaRespuestaDTO.getIdCenso());  
+                    ps.setInt(2, vivi.getIdVivienda());  
+                    ps.setString(3, viviendaRespuestaDTO.getEstado());                    
+
+                    return ps.execute();  
+
+                }  
+                });  
+            
+        }
+        
+        return true;
+    }
+    
+     public boolean updateViviendaRespuesta(List<ViviendaRespuestaDTO> viviendaRespuestaDTO){       
+        
+        
+        for(ViviendaRespuestaDTO vivi: viviendaRespuestaDTO){
+            
+            String query = "UPDATE censoVivienda " +
+                            "SET respuesta = ? , estado= ? " +
+                            "WHERE idCenso = ? and idVivienda = ?";
+        
+         
+            jdbcTemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
+                @Override  
+                public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException{  
+                    ps.setString(1, vivi.getRespuesta());  
+                    ps.setString(2, vivi.getRespuesta());  
+                    ps.setInt(3, vivi.getIdCenso());                    
+                    ps.setInt(4, vivi.getIdVivienda());
+
+                    return ps.execute();  
+
+                }  
+                });  
+            
+        }
+        
+        return true;
     }
     
 }
