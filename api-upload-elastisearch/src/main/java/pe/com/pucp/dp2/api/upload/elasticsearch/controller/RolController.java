@@ -69,4 +69,23 @@ public class RolController {
 
     }
     
+    @RequestMapping(value = "/actualizar", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<ResponseGeneral> actualizarRol(@RequestBody @Valid @NotNull  RolDTO usuarioDto) {
+        try{
+            
+            rolRepositoryImpl.actualizarRol(usuarioDto);
+            return new ResponseEntity<>(new ResponseGeneral(200, "Insertado satisfactoriamente", null), HttpStatus.OK);
+
+        }catch (Exception e){
+            System.out.println("error");
+            System.out.println(e);
+            System.out.println(e.toString());
+            StringWriter sw = new StringWriter();
+            return new ResponseEntity<>(new ResponseGeneral(500, sw.toString(), null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+    
 }

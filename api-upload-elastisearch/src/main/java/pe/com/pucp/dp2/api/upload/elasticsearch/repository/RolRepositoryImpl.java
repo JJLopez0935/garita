@@ -76,4 +76,27 @@ public class RolRepositoryImpl implements RolRepository{
         return students;
     }
     
+    public Boolean actualizarRol(RolDTO rol) {
+        
+
+        
+        String query = "update rol"
+                + " set nombre = ?, descripcion = ? "
+                + " where idRol = ?";
+        
+        
+        return jdbcTemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
+            @Override  
+            public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException  
+                     {  
+                ps.setString(1, rol.getNombre());  
+                ps.setString(2, rol.getDescripcion()); 
+                ps.setInt(3, rol.getIdRol());
+
+                return ps.execute();  
+
+            }  
+            });  
+    }
+    
 }
