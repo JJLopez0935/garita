@@ -37,35 +37,65 @@ public class UsuarioRepositoryImpl implements UsuarioRepository{
     public Boolean saveUsuario(UsuarioDTO u) {
         
         System.out.println(u.getNombres());
-        
-        String query = "INSERT INTO usuario"
+        if(!verificarExiste(u)){
+            String query = "INSERT INTO usuario"
                 + " (nombres, apePaterno, apeMaterno, fecNacimiento, email, activo, idRol, usuario, password, fecRegistro) "
                 + " VALUE(?,?,?,?,?,?,?,?,?,Curdate())";
         
         
-        return jdbcTemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
-            @Override  
-            public Boolean doInPreparedStatement(PreparedStatement ps)   
-                     {  
-                try {
-                    ps.setString(1, u.getNombres());
-                    ps.setString(2, u.getApeMaterno());
-                    ps.setString(3, u.getApeMaterno());
-                    ps.setDate(4, u.getFecNacimiento());
-                    ps.setString(5, u.getEmail());
-                    ps.setBoolean(6, u.isActivo());
-                    ps.setInt(7, u.getIdRol());
-                    ps.setString(8, u.getUsuario());
-                    ps.setString(9, u.getPassword());
-                      
-                    ps.execute();
-                    return true;
-                } catch (SQLException ex) {
-                    
-                    return false;                
-                }
-            }  
-            });  
+            return jdbcTemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
+                @Override  
+                public Boolean doInPreparedStatement(PreparedStatement ps)   
+                         {  
+                    try {
+                        ps.setString(1, u.getNombres());
+                        ps.setString(2, u.getApeMaterno());
+                        ps.setString(3, u.getApeMaterno());
+                        ps.setDate(4, u.getFecNacimiento());
+                        ps.setString(5, u.getEmail());
+                        ps.setBoolean(6, u.isActivo());
+                        ps.setInt(7, u.getIdRol());
+                        ps.setString(8, u.getUsuario());
+                        ps.setString(9, u.getPassword());
+
+                        ps.execute();
+                        return true;
+                    } catch (SQLException ex) {
+
+                        return false;                
+                    }
+                }  
+                });  
+        }
+        return false;
+        
+    }
+    
+    private boolean verificarExiste(UsuarioDTO u){
+        
+        
+        String SQL = "select * from usuario where usuario = '" +  u.getUsuario() + 
+                         "' ";
+            
+            
+            
+            boolean students = jdbcTemplate.query(SQL, 
+               new ResultSetExtractor<Boolean>(){
+
+               public Boolean extractData(
+                  ResultSet rs) throws SQLException, DataAccessException {
+
+                  
+                  if(rs.next()){  
+                                    
+                     
+                     return true; 
+                  }  
+                  return false;
+               }    	  
+            });
+            
+            return students;
         
     }
 

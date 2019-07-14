@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ResidenteDTO;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ViviendaDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ViviendaRespuestaDTO;
 
@@ -33,8 +34,8 @@ public class ViviendaRepositoryImpl {
     
     public Boolean saveUsuario(ViviendaDTO v) {
         
-        
-        String query = "INSERT INTO vivienda"
+        if(!verificarExiste(v)){
+                String query = "INSERT INTO vivienda"
                 + " (direccion, nombreContacto, telefonoContacto, activo, idRol, email, usuario, password, fecRegistro) "
                 + " VALUE(?,?,?,?,?,?,?,?,Curdate())";
         
@@ -59,8 +60,38 @@ public class ViviendaRepositoryImpl {
 
             }  
             });  
+        }
+        
+        return false;
     }
     
+    
+    private boolean verificarExiste(ViviendaDTO u){
+        
+        String SQL = "select * from vivienda where usuario = '" +  u.getUsuario() + 
+                         "' ";
+            
+            
+            
+            boolean students = jdbcTemplate.query(SQL, 
+               new ResultSetExtractor<Boolean>(){
+
+               public Boolean extractData(
+                  ResultSet rs) throws SQLException, DataAccessException {
+
+                  
+                  if(rs.next()){  
+                                    
+                     return true; 
+                  }  
+                  return false;
+               }    	  
+            });
+            
+            
+            return students;
+        
+    }
     
     public List<ViviendaDTO> getViviendas() {
         try{
@@ -123,7 +154,6 @@ public class ViviendaRepositoryImpl {
             });
             return students;
         }catch(Exception ex){
-            System.out.println(ex);
             return null;
         }
         

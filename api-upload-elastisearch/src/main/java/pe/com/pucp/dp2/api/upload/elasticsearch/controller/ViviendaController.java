@@ -40,8 +40,13 @@ public class ViviendaController {
     public ResponseEntity<ResponseGeneral> insertarUsuario(@RequestBody @Valid @NotNull ViviendaDTO usuarioDto) {
         try{
             
-            viviendaRepositoryImpl.saveUsuario(usuarioDto);
-            return new ResponseEntity<>(new ResponseGeneral(200, "Insertado satisfactoriamente", null), HttpStatus.OK);
+            
+            if(viviendaRepositoryImpl.saveUsuario(usuarioDto))
+                return new ResponseEntity<>(new ResponseGeneral(200, "Insertado satisfactoriamente", null), HttpStatus.OK);
+            else
+                return new ResponseEntity<>(new ResponseGeneral(405, "Ya existe usuario registrado", null), HttpStatus.CONFLICT);
+            
+            
         }catch (Exception e){
             System.out.println("error");
             System.out.println(e);
