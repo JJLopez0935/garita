@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.bean.ResponseGeneral;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.ResidenteDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.RolDTO;
+import pe.com.pucp.dp2.api.upload.elasticsearch.model.dto.UsuarioDTO;
 import pe.com.pucp.dp2.api.upload.elasticsearch.repository.ResidenteRepositoryImpl;
 
 /**
@@ -87,4 +88,26 @@ public class ResidenteController {
 
     }
     
+        
+
+
+    @RequestMapping(value = "/actualizar", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<ResponseGeneral> actualizarResidente(@RequestBody @Valid @NotNull  ResidenteDTO usuarioDto) {
+        try{
+            residenteRepositoryImpl.actualizarResidente(usuarioDto);
+            return new ResponseEntity<>(new ResponseGeneral(200, "Modificado satisfactoriamente", null), HttpStatus.OK);
+            
+        }catch (Exception e){
+            System.out.println("error");
+            System.out.println(e);
+            System.out.println(e.toString());
+            StringWriter sw = new StringWriter();
+            return new ResponseEntity<>(new ResponseGeneral(500, sw.toString(), null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+
+
 }

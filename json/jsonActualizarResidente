@@ -1,0 +1,12 @@
+{
+			"idResidente":"2",
+	    "idVivienda": "1",
+	    "nombres": "juanjo",
+	    "apeMaterno": "chiarella",
+	    "apePaterno": "locrero",
+	    "fecNacimiento": "2019-06-23",
+	    "genero": "chivo",
+	    "email":"josue@pucp.pe",
+	    "activo":"true"
+
+}

@@ -124,4 +124,32 @@ public class ResidenteRepositoryImpl {
     }
     
     
+    public Boolean actualizarResidente(ResidenteDTO r) {
+        
+        
+        String query = "update residente"
+                + " set idVivienda = ?, nombres = ?, apeMaterno = ?, apePaterno = ?, fecNacimiento = ?, genero = ?, email = ?, activo = ?, fecRegistro = Curdate() "
+                + " where idResidente = ?";       
+        
+        
+        return jdbcTemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
+            @Override  
+            public Boolean doInPreparedStatement(PreparedStatement ps) throws SQLException  
+                     {  
+
+                ps.setInt(1, r.getIdVivienda());  
+                ps.setString(2, r.getNombres());  
+                ps.setString(3, r.getApeMaterno());
+                ps.setString(4, r.getApePaterno()); 
+                ps.setDate(5, r.getFecNacimiento()); 
+                ps.setString(6, r.getGenero());
+                ps.setString(7, r.getEmail());
+                ps.setBoolean(8, r.isActivo());
+                ps.setInt(9, r.getIdResidente());  
+                return ps.execute();  
+
+            }  
+            });  
+    }
+    
 }

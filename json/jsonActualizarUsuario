@@ -1,0 +1,13 @@
+{
+	    "usuarioId": "6",
+	    "nombres": "nuevo",
+	    "apePaterno": "palermo",
+	    "apeMaterno": "lornero",
+	    "idRol": "1",
+	    "email": "josue@pucp.pe",
+	    "fecNacimiento": "2019-06-23",
+	    "password": "Server123456",
+	    "activo":"true",
+	    "usuario":"usuario5"
+
+}
