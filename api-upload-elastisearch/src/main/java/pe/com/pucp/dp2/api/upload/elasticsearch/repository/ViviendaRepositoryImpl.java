@@ -32,6 +32,9 @@ public class ViviendaRepositoryImpl {
     @Autowired
     JdbcTemplate jdbcTemplate;    
     
+    @Autowired
+    ResidenteRepositoryImpl residenteRepositoryImpl;
+    
     public Boolean saveUsuario(ViviendaDTO v) {
         
         if(!verificarExiste(v)){
@@ -295,7 +298,49 @@ ps.setString(8, usuarioDto.getUsuario());
             });  
         }
         
-       
+       public List<ViviendaDTO> getCalvo() {
+        try{
+            String SQL = "select * from vivienda ";           
+
+            List <ViviendaDTO> students = jdbcTemplate.query(SQL, 
+               new ResultSetExtractor<List<ViviendaDTO>>(){
+
+               public List<ViviendaDTO> extractData(
+                  ResultSet rs) throws SQLException, DataAccessException {
+
+                  List<ViviendaDTO> list = new ArrayList<ViviendaDTO>();  
+                  while(rs.next()){ 
+                        ViviendaDTO student = new ViviendaDTO();
+                        student.setActivo(rs.getBoolean("activo"));
+                        student.setIdVivienda(rs.getInt("idVivienda"));
+                        student.setDireccion(rs.getString("direccion"));
+                        student.setNombreContacto(rs.getString("nombreContacto"));
+                        student.setTelefonoContacto(rs.getString("telefonoContacto"));
+                        student.setIdRol(rs.getInt("idRol"));
+                        student.setEmail(rs.getString("email"));
+                        student.setUsuario(rs.getString("usuario"));
+                        student.setPassword(rs.getString("password"));
+                        
+                        
+                        student.setResidentes(residenteRepositoryImpl.getUsuariosIdVivienda(String.valueOf(rs.getInt("idVivienda"))));
+                        
+                        list.add(student);
+                      
+                        
+                      
+                    
+                    }
+
+                   
+                  return list;  
+               }    	  
+            });
+            return students;
+        }catch(Exception ex){
+            return null;
+        }
+        
+    }
     
     
     

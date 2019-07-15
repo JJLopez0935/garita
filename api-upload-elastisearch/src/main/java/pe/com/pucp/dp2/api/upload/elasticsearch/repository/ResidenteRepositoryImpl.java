@@ -101,7 +101,37 @@ public class ResidenteRepositoryImpl {
            public ResidenteDTO extractData(
               ResultSet rs) throws SQLException, DataAccessException {
 
-              ResidenteDTO list = new ResidenteDTO();  
+              ResidenteDTO student = new ResidenteDTO();  
+              while(rs.next()){  
+                student.setIdResidente(rs.getInt("idResidente"));
+                student.setNombres(rs.getString("nombres"));
+                student.setApePaterno(rs.getString("apePaterno"));
+                student.setApeMaterno(rs.getString("apeMaterno"));
+                student.setEmail(rs.getString("email"));
+                student.setFecNacimiento(rs.getDate("fecNacimiento"));
+                student.setActivo(rs.getBoolean("activo"));
+                student.setGenero(rs.getString("genero"));
+                
+                 
+                
+             
+              }  
+              return student;  
+           }    	  
+        });
+        return students;
+    }
+    
+    public List<ResidenteDTO> getUsuariosIdVivienda(String id) {
+        String SQL = "select * from residente where idVivienda="+id;           
+            
+        List<ResidenteDTO> students = jdbcTemplate.query(SQL, 
+           new ResultSetExtractor<List<ResidenteDTO>>(){
+
+           public List<ResidenteDTO> extractData(
+              ResultSet rs) throws SQLException, DataAccessException {
+
+              List<ResidenteDTO> list = new ArrayList<ResidenteDTO>();  
               while(rs.next()){  
                  ResidenteDTO student = new ResidenteDTO();
                 student.setIdResidente(rs.getInt("idResidente"));
@@ -113,7 +143,7 @@ public class ResidenteRepositoryImpl {
                 student.setActivo(rs.getBoolean("activo"));
                 student.setGenero(rs.getString("genero"));
                 
-                 
+                 list.add(student);
 
              
               }  
@@ -122,7 +152,6 @@ public class ResidenteRepositoryImpl {
         });
         return students;
     }
-    
     
     public Boolean actualizarResidente(ResidenteDTO r) {
         

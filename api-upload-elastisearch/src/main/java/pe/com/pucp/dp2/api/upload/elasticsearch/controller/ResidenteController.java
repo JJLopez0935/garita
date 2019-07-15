@@ -75,10 +75,10 @@ public class ResidenteController {
     
     @RequestMapping(value = "/getById", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<ResidenteDTO>> getUsuariosId(@RequestParam int id) {
+    public ResponseEntity<ResidenteDTO> getUsuariosId(@RequestParam int id) {
         try{
             
-            return new ResponseEntity<>(residenteRepositoryImpl.getUsuarios(), HttpStatus.OK);
+            return new ResponseEntity<>(residenteRepositoryImpl.getUsuariosId(String.valueOf(id)), HttpStatus.OK);
         }catch (Exception e){
             System.out.println("error");
             System.out.println(e);
@@ -90,7 +90,7 @@ public class ResidenteController {
 
     }
     
-        
+
 
 
     @RequestMapping(value = "/actualizar", method = RequestMethod.POST)

@@ -153,4 +153,21 @@ public class ViviendaController {
 
     }
     
+    @RequestMapping(value = "/getCalvo", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<ViviendaDTO>> getUsuarios2233() {
+        try{
+            
+            return new ResponseEntity<>(viviendaRepositoryImpl.getCalvo(), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println("error");
+            System.out.println(e);
+            System.out.println(e.toString());
+            System.out.println(e.getCause());
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+    
 }

@@ -89,4 +89,22 @@ public class FormularioController {
 
     }
     
+    @RequestMapping(value = "/eliminar", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<ResponseGeneral> eliminarFormulario(@RequestParam int id) {
+        try{
+            
+            formularioRepositoryImpl.eliminarFormulario(id);
+            return new ResponseEntity<>(new ResponseGeneral(200, "Eliminado satisfactoriamente", null), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println("error");
+            System.out.println(e);
+            System.out.println(e.toString());
+            StringWriter sw = new StringWriter();
+            return new ResponseEntity<>(new ResponseGeneral(500, sw.toString(), null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+    
         }
