@@ -135,4 +135,22 @@ public class ViviendaController {
 
     }
     
+    
+    @RequestMapping(value = "/getViviendas", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<ViviendaDTO>> getUsuarios22() {
+        try{
+            
+            return new ResponseEntity<>(viviendaRepositoryImpl.getViviendasSinResidentes(), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println("error");
+            System.out.println(e);
+            System.out.println(e.toString());
+            System.out.println(e.getCause());
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+    }
+    
 }

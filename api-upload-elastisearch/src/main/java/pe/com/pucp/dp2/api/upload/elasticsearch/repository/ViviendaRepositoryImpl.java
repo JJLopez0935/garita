@@ -35,6 +35,7 @@ public class ViviendaRepositoryImpl {
     public Boolean saveUsuario(ViviendaDTO v) {
         
         if(!verificarExiste(v)){
+            System.out.println("pasa filtro");
                 String query = "INSERT INTO vivienda"
                 + " (direccion, nombreContacto, telefonoContacto, activo, idRol, email, usuario, password, fecRegistro) "
                 + " VALUE(?,?,?,?,?,?,?,?,Curdate())";
@@ -61,13 +62,14 @@ return true;
             }  
             });  
         }
-        
+        System.out.println("no pasa filtro");
         return false;
     }
     
     
     private boolean verificarExiste(ViviendaDTO u){
         
+        System.out.println(u.getUsuario());
         String SQL = "select * from vivienda where usuario = '" +  u.getUsuario() + 
                          "' ";
             
@@ -88,6 +90,7 @@ return true;
                }    	  
             });
             
+            System.out.println("retornora " + students);
             
             return students;
         
@@ -149,6 +152,46 @@ return true;
                     }
 
                   }  
+                  return list;  
+               }    	  
+            });
+            return students;
+        }catch(Exception ex){
+            return null;
+        }
+        
+    }
+    
+    public List<ViviendaDTO> getViviendasSinResidentes() {
+        try{
+            String SQL = "select * from vivienda ";           
+
+            List <ViviendaDTO> students = jdbcTemplate.query(SQL, 
+               new ResultSetExtractor<List<ViviendaDTO>>(){
+
+               public List<ViviendaDTO> extractData(
+                  ResultSet rs) throws SQLException, DataAccessException {
+
+                  List<ViviendaDTO> list = new ArrayList<ViviendaDTO>();  
+                  while(rs.next()){ 
+                     ViviendaDTO student = new ViviendaDTO();
+                        student.setActivo(rs.getBoolean("activo"));
+                        student.setIdVivienda(rs.getInt("idVivienda"));
+                        student.setDireccion(rs.getString("direccion"));
+                        student.setNombreContacto(rs.getString("nombreContacto"));
+                        student.setTelefonoContacto(rs.getString("telefonoContacto"));
+                        student.setIdRol(rs.getInt("idRol"));
+                        student.setEmail(rs.getString("email"));
+                        student.setUsuario(rs.getString("usuario"));
+                        student.setPassword(rs.getString("password"));
+                        
+                        list.add(student);
+                      
+                      
+                    
+                    }
+
+                   
                   return list;  
                }    	  
             });
