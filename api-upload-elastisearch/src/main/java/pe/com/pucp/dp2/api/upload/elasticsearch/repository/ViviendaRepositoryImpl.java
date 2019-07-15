@@ -56,8 +56,8 @@ public class ViviendaRepositoryImpl {
                 ps.setString(7, v.getUsuario());
                 ps.setString(8, v.getPassword());
 
-                return ps.execute();  
-
+                ps.execute();  
+return true;
             }  
             });  
         }
